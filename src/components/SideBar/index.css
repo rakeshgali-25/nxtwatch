@@ -1,0 +1,44 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 20%;
+  border: 1px solid black;
+  height: 100vh;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.contact-us {
+  font-weight: 600;
+  font-family: Roboto;
+  color: #313131;
+  font-size: 20px;
+  padding: 25px;
+}
+
+.logo {
+  height: 50px;
+}
+
+.below-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.para {
+  color: #475569;
+  font-family: Roboto;
+  padding: 25px;
+}

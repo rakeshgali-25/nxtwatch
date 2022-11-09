@@ -1,0 +1,24 @@
+.list-item {
+  list-style-type: none;
+  width: 250px;
+  padding-right: 20px;
+}
+
+.thumbnail-image {
+  height: 150px;
+}
+
+.channel-image {
+  height: 30px;
+  margin: 10px;
+}
+
+.channel-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.channel-para {
+  font-family: Roboto;
+  color: #212121;
+}
