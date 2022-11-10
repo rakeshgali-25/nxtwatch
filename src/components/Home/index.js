@@ -2,7 +2,7 @@ import './index.css'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {BsSearch} from 'react-icons/bs'
-import {Loader} from 'react-loader-spinner'
+import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import NxtWatchBanner from '../NxtWatchBanner'
@@ -29,11 +29,12 @@ class Home extends Component {
 
   renderLoading = () => (
     <div className="loader-container">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+      <Loader type="ThreeDots" color="black" height="50" width="50" />
     </div>
   )
 
   getTheData = async () => {
+    this.setState({apiStatus: apiConstants.inProgress})
     const {searchInput} = this.state
 
     const jwtToken = Cookies.get('jwt_token')

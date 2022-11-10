@@ -1,6 +1,7 @@
 import './index.css'
 import {formatDistanceToNow} from 'date-fns'
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 class VideoItem extends Component {
   getDiff = publishedAt => {
@@ -14,21 +15,27 @@ class VideoItem extends Component {
     const {name, profileImageUrl} = channel
     const difference = this.getDiff(publishedAt)
     return (
-      <li className="list-item">
-        <img src={thumbnailUrl} alt="thumbnail" className="thumbnail-image" />
-        <div className="channel-container">
-          <img src={profileImageUrl} alt="channel" className="channel-image" />
-          <div>
-            <p className="channel-para">{title}</p>
-            <p className="channel-para">{name}</p>
+      <Link to={`/videos/${id}`} className="link">
+        <li className="list-item">
+          <img src={thumbnailUrl} alt="thumbnail" className="thumbnail-image" />
+          <div className="channel-container">
+            <img
+              src={profileImageUrl}
+              alt="channel"
+              className="channel-image"
+            />
             <div>
-              <p className="channel-para">
-                {viewsCount} views . {difference}
-              </p>
+              <p className="channel-para">{title}</p>
+              <p className="channel-para">{name}</p>
+              <div>
+                <p className="channel-para">
+                  {viewsCount} views . {difference}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
+        </li>
+      </Link>
     )
   }
 }

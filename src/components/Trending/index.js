@@ -2,7 +2,7 @@ import './index.css'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {BsSearch} from 'react-icons/bs'
-import {Loader} from 'react-loader-spinner'
+import Loader from 'react-loader-spinner'
 import {MdWhatshot} from 'react-icons/md'
 import Header from '../Header'
 import SideBar from '../SideBar'
@@ -30,13 +30,12 @@ class Trending extends Component {
 
   renderLoading = () => (
     <div className="loader-container">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+      <Loader type="ThreeDots" color="black" height="50" width="50" />
     </div>
   )
 
   getTheData = async () => {
-    const {searchInput} = this.state
-
+    this.setState({apiStatus: apiConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = ` https://apis.ccbp.in/videos/trending`
     const options = {

@@ -2,6 +2,7 @@
   list-style-type: none;
   width: 250px;
   padding-right: 20px;
+  text-decoration: none;
 }
 
 .thumbnail-image {
@@ -16,9 +17,15 @@
 .channel-container {
   display: flex;
   flex-direction: row;
+  text-decoration: none;
 }
 
 .channel-para {
   font-family: Roboto;
   color: #212121;
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
 }

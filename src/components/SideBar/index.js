@@ -19,25 +19,25 @@ class SideBar extends Component {
         <ListContainer>
           <Link to="/" className="link">
             <Item>
-              <AiFillHome />
+              <AiFillHome className="sidebar-icon" />
               <p>Home</p>
             </Item>
           </Link>
           <Link to="/trending" className="link">
             <Item>
-              <MdWhatshot />
+              <MdWhatshot className="sidebar-icon" />
               <p>Trending</p>
             </Item>
           </Link>
           <Link to="/gaming" className="link">
             <Item>
-              <SiYoutubegaming />
+              <SiYoutubegaming className="sidebar-icon" />
               <p>Gaming</p>
             </Item>
           </Link>
           <Link to="/" className="link">
             <Item>
-              <BiListPlus />
+              <BiListPlus className="sidebar-icon" />
               <p>Saved Videos</p>
             </Item>
           </Link>

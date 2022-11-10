@@ -1,0 +1,12 @@
+.video-details-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.video-details {
+  width: 100%;
+}
