@@ -11,17 +11,40 @@ import SavedVideos from './components/SavedVideos'
 import NxtWatchContext from './context/NxtWatchContext'
 
 class App extends Component {
-  state = {savedVideos: []}
+  state = {savedVideos: [], lightTheme: false}
 
-  onClickSaved = id => {
-    console.log(id)
+  onClickSaved = () => {
+    console.log('clicked')
+  }
+
+  onClickSaveButton = details => {
+    const {savedVideos} = this.state
+
+    this.setState({savedVideos: [...savedVideos, details]}, this.printSaved())
+  }
+
+  printSaved = () => {
+    const {savedVideos} = this.state
+    console.log(savedVideos)
+  }
+
+  onClickTheme = () => {
+    const {lightTheme} = this.state
+
+    this.setState({lightTheme: !lightTheme})
   }
 
   render() {
-    const {savedVideos} = this.state
+    const {savedVideos, lightTheme} = this.state
     return (
       <NxtWatchContext.Provider
-        value={{savedVideos, onCLickSaved: this.onClickSaved}}
+        value={{
+          savedVideos,
+          lightTheme,
+          onCLickSaved: this.onClickSaved,
+          onClickTheme: this.onClickTheme,
+          onClickSaveButton: this.onClickSaveButton,
+        }}
       >
         <Switch>
           <Route path="/login" component={Login} />

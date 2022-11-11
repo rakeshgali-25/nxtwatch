@@ -9,6 +9,7 @@ import SideBar from '../SideBar'
 import NxtWatchBanner from '../NxtWatchBanner'
 import VideoItem from '../VideoItem'
 import TrendingItem from '../TrendingItem'
+import NxtWatchContext from '../../context/NxtWatchContext'
 
 const apiConstants = {
   initial: 'INITIAL',
@@ -34,41 +35,22 @@ class SavedVideos extends Component {
     </div>
   )
 
-  getTheData = async () => {
-    this.setState({apiStatus: apiConstants.inProgress})
-    const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = ` https://apis.ccbp.in/videos/trending`
-    const options = {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    }
-
-    const response = await fetch(apiUrl, options)
-    const data = await response.json()
-    console.log(data)
-    const updatedData = data.videos.map(each => ({
-      id: each.id,
-      title: each.title,
-      publishedAt: each.published_at,
-      thumbnailUrl: each.thumbnail_url,
-      viewCount: each.view_count,
-      channel: {
-        name: each.channel.name,
-        profileImageUrl: each.channel.profile_image_url,
-      },
-    }))
-    console.log(updatedData)
-    if (response.ok === true) {
-      this.setState({
-        trendingList: updatedData,
-        apiStatus: apiConstants.success,
-      })
-    } else {
-      this.setState({apiStatus: apiConstants.failure})
-    }
-  }
+  getTheData = async () => (
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {savedVideos} = value
+        console.log(savedVideos)
+        if (savedVideos !== []) {
+          this.setState({
+            savedList: savedVideos,
+            apiStatus: apiConstants.success,
+          })
+        } else {
+          this.setState({apiStatus: apiConstants.failure})
+        }
+      }}
+    </NxtWatchContext.Consumer>
+  )
 
   onClickRetry = () => {
     console.log('retry')
@@ -80,18 +62,17 @@ class SavedVideos extends Component {
       <div className="icon-container">
         <MdWhatshot className="trending-icon" />
       </div>
-      <h1 className="trending">Trending</h1>
+      <h1 className="trending">Saved Videos</h1>
     </div>
   )
 
   renderSuccess = () => {
-    const {trendingList} = this.state
-    console.log(trendingList)
-
+    const {savedList} = this.state
+    console.log(savedList)
     return (
       <ul className="un-trending-list">
-        {trendingList.map(each => (
-          <TrendingItem each={each} key={each.id} />
+        {savedList.map(each => (
+          <li>{each.name}</li>
         ))}
       </ul>
     )

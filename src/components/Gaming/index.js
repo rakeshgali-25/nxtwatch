@@ -46,7 +46,6 @@ class Gaming extends Component {
     const response = await fetch(apiUrl, options)
     const data = await response.json()
 
-    console.log(data)
     if (response.ok === true) {
       const updatedData = data.videos.map(each => ({
         id: each.id,

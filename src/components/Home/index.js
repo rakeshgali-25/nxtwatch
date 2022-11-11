@@ -60,7 +60,7 @@ class Home extends Component {
         profileImageUrl: each.channel.profile_image_url,
       },
     }))
-    console.log(updatedData)
+
     if (response.ok === true) {
       this.setState({videosList: updatedData, apiStatus: apiConstants.success})
     } else {
@@ -71,7 +71,6 @@ class Home extends Component {
   onClickInto = () => {
     const {banner} = this.state
     this.setState(prevState => ({banner: !prevState.banner}))
-    console.log(banner)
   }
 
   onChangeInput = event => {
@@ -103,7 +102,6 @@ class Home extends Component {
 
   renderSuccess = () => {
     const {videosList} = this.state
-    console.log(videosList)
 
     return (
       <ul className="un-list">

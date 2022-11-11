@@ -47,7 +47,7 @@ class Trending extends Component {
 
     const response = await fetch(apiUrl, options)
     const data = await response.json()
-    console.log(data)
+
     const updatedData = data.videos.map(each => ({
       id: each.id,
       title: each.title,
@@ -59,7 +59,7 @@ class Trending extends Component {
         profileImageUrl: each.channel.profile_image_url,
       },
     }))
-    console.log(updatedData)
+
     if (response.ok === true) {
       this.setState({
         trendingList: updatedData,
@@ -70,23 +70,7 @@ class Trending extends Component {
     }
   }
 
-  onClickInto = () => {
-    const {banner} = this.state
-    this.setState(prevState => ({banner: !prevState.banner}))
-    console.log(banner)
-  }
-
-  onChangeInput = event => {
-    this.setState({searchInput: event.target.value})
-  }
-
-  onClickSearch = () => {
-    const {searchInput} = this.state
-    this.setState({searchInput}, this.getTheData)
-  }
-
   onClickRetry = () => {
-    console.log('retry')
     this.getTheData()
   }
 
@@ -101,7 +85,6 @@ class Trending extends Component {
 
   renderSuccess = () => {
     const {trendingList} = this.state
-    console.log(trendingList)
 
     return (
       <ul className="un-trending-list">

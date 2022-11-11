@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const LogoutButton = styled.button`
+export const LightLogoutButton = styled.button`
   color: blue;
   padding: 7px;
   background-color: transparent;
@@ -8,6 +8,15 @@ export const LogoutButton = styled.button`
   padding-top: 3px;
   padding-bottom: 3px;
 `
+export const DarkLogoutButton = styled.button`
+  color: #ffffff;
+  padding: 7px;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  padding-top: 3px;
+  padding-bottom: 3px;
+`
+
 export const RightContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -24,8 +33,10 @@ export const HeaderContainer = styled.div`
   padding: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid black;
+
+  background-color: ${props => props.color};
 `
+
 export const CompanyImage = styled.img`
   height: 35px;
 `

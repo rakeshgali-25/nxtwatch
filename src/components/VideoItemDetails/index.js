@@ -48,7 +48,7 @@ class VideoItemDetails extends Component {
 
     const response = await fetch(apiUrl, options)
     const data = await response.json()
-    console.log(data)
+
     if (response.ok === true) {
       const updatedData = {
         channel: {
@@ -96,10 +96,10 @@ class VideoItemDetails extends Component {
         const {name, profileImageUrl, subscriberCount} = channel
         console.log(videoUrl)
         const difference = this.getDiff(publishedAt)
-        const {onClickSaved, savedVideos} = value
+        const {onClickSaveButton} = value
+
         const saveClicked = () => {
-          onClickSaved(id)
-          console.log(savedVideos)
+          onClickSaveButton(videoDetails)
         }
 
         return (

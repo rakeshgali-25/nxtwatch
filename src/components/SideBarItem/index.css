@@ -1,0 +1,10 @@
+.sidebar-list-item {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0px;
+  margin-left: 0px;
+  border: 1px solid black;
+}
