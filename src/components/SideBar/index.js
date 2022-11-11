@@ -35,7 +35,7 @@ class SideBar extends Component {
               <p>Gaming</p>
             </Item>
           </Link>
-          <Link to="/" className="link">
+          <Link to="/savedvideos" className="link">
             <Item>
               <BiListPlus className="sidebar-icon" />
               <p>Saved Videos</p>
