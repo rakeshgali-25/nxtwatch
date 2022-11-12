@@ -4,12 +4,12 @@
   margin: 0px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #94a3b8;
 }
 
 .home-container {
   display: flex;
   flex-direction: row;
+  background-color: black;
 }
 
 .search-container {
@@ -20,7 +20,7 @@
 .search-input {
   padding: 10px;
   width: 600px;
-
+  background-color: transparent;
   outline: none;
 }
 
@@ -44,6 +44,14 @@
 
 .failure-image {
   height: 400px;
+}
+
+.light-home-bg {
+  background-color: #ffffff;
+}
+
+.dark-home-bg {
+  background-color: #181818;
 }
 
 .failure-container {

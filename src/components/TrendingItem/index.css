@@ -4,7 +4,7 @@
   padding-right: 20px;
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
+
   align-items: flex-start;
   width: 80%;
   padding-top: none;
@@ -23,13 +23,24 @@
   padding: 15px;
 }
 
-.channel-para {
+.channel-light-para {
   font-family: Roboto;
   color: #212121;
 }
 
-.channel-title {
+.channel-dark-para {
+  font-family: Roboto;
+  color: white;
+}
+
+.channel-light-name {
   color: #1e293b;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.channel-dark-name {
+  color: white;
   font-weight: 500;
   font-size: 20px;
 }

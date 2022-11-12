@@ -2,6 +2,7 @@ import './index.css'
 import {formatDistanceToNow} from 'date-fns'
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
+import NxtWatchContext from '../../context/NxtWatchContext'
 
 class VideoItem extends Component {
   getDiff = publishedAt => {
@@ -10,32 +11,53 @@ class VideoItem extends Component {
   }
 
   render() {
-    const {each} = this.props
-    const {channel, id, publishedAt, viewsCount, title, thumbnailUrl} = each
-    const {name, profileImageUrl} = channel
-    const difference = this.getDiff(publishedAt)
     return (
-      <Link to={`/videos/${id}`} className="link">
-        <li className="list-item">
-          <img src={thumbnailUrl} alt="thumbnail" className="thumbnail-image" />
-          <div className="channel-container">
-            <img
-              src={profileImageUrl}
-              alt="channel"
-              className="channel-image"
-            />
-            <div>
-              <p className="channel-para">{title}</p>
-              <p className="channel-para">{name}</p>
-              <div>
-                <p className="channel-para">
-                  {viewsCount} views . {difference}
-                </p>
-              </div>
-            </div>
-          </div>
-        </li>
-      </Link>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {each} = this.props
+          const {
+            channel,
+            id,
+            publishedAt,
+            viewsCount,
+            title,
+            thumbnailUrl,
+          } = each
+          const {name, profileImageUrl} = channel
+          const difference = this.getDiff(publishedAt)
+          const {lightTheme} = value
+          const itemHeading = lightTheme
+            ? 'light-item-heading'
+            : 'dark-item-heading'
+          const itemPara = lightTheme ? 'light-item-para' : 'dark-item-para'
+          return (
+            <Link to={`/videos/${id}`} className="link">
+              <li className="list-item">
+                <img
+                  src={thumbnailUrl}
+                  alt="thumbnail"
+                  className="thumbnail-image"
+                />
+                <div className="channel-container">
+                  <img
+                    src={profileImageUrl}
+                    alt="channel"
+                    className="channel-image"
+                  />
+                  <div className="description-container">
+                    <p className={itemHeading}>{title}</p>
+                    <p className={itemPara}>{name}</p>
+
+                    <p className={itemPara}>
+                      {viewsCount} views . {difference}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </Link>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }

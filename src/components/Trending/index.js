@@ -9,6 +9,7 @@ import SideBar from '../SideBar'
 import NxtWatchBanner from '../NxtWatchBanner'
 import VideoItem from '../VideoItem'
 import TrendingItem from '../TrendingItem'
+import NxtWatchContext from '../../context/NxtWatchContext'
 
 const apiConstants = {
   initial: 'INITIAL',
@@ -75,12 +76,21 @@ class Trending extends Component {
   }
 
   renderTrendingBanner = () => (
-    <div className="trending-banner">
-      <div className="icon-container">
-        <MdWhatshot className="trending-icon" />
-      </div>
-      <h1 className="trending">Trending</h1>
-    </div>
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+        const darkBg = lightTheme ? 'light-bg-trending' : 'dark-bg-trending'
+        const iconBg = lightTheme ? '' : 'dark-trending-icon'
+        return (
+          <div className={darkBg}>
+            <div className="icon-container">
+              <MdWhatshot className={`trending-icon ${iconBg}`} />
+            </div>
+            <h1 className="trending">Trending</h1>
+          </div>
+        )
+      }}
+    </NxtWatchContext.Consumer>
   )
 
   renderSuccess = () => {
@@ -135,16 +145,24 @@ class Trending extends Component {
 
   render() {
     return (
-      <div className="home-container">
-        <SideBar />
-        <div className="display-container">
-          <Header />
-          {this.renderTrendingBanner()}
-          <div className="below-trending-container">
-            {this.renderTheVideos()}
-          </div>
-        </div>
-      </div>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {lightTheme} = value
+          const belowContainer = lightTheme
+            ? 'below-trending-light-container'
+            : 'below-trending-dark-container'
+          return (
+            <div className="trending-container">
+              <SideBar />
+              <div className="display-container">
+                <Header />
+                {this.renderTrendingBanner()}
+                <div className={belowContainer}>{this.renderTheVideos()}</div>
+              </div>
+            </div>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }

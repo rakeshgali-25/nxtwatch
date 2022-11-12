@@ -7,6 +7,7 @@ import Header from '../Header'
 import SideBar from '../SideBar'
 import NxtWatchBanner from '../NxtWatchBanner'
 import VideoItem from '../VideoItem'
+import NxtWatchContext from '../../context/NxtWatchContext'
 
 const apiConstants = {
   initial: 'INITIAL',
@@ -88,27 +89,44 @@ class Home extends Component {
   }
 
   renderSearchBar = () => (
-    <div className="search-container">
-      <input
-        type="search"
-        className="search-input"
-        onChange={this.onChangeInput}
-      />
-      <div className="search-icon">
-        <BsSearch onClick={this.onClickSearch} />
-      </div>
-    </div>
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+        const sdBg = lightTheme ? 'lightBg' : 'darkBg'
+
+        return (
+          <div className="search-container">
+            <input
+              type="search"
+              className="search-input"
+              onChange={this.onChangeInput}
+              placeholder="Search"
+            />
+            <div className={`search-icon ${sdBg}`}>
+              <BsSearch onClick={this.onClickSearch} />
+            </div>
+          </div>
+        )
+      }}
+    </NxtWatchContext.Consumer>
   )
 
   renderSuccess = () => {
     const {videosList} = this.state
-
     return (
-      <ul className="un-list">
-        {videosList.map(each => (
-          <VideoItem each={each} key={each.id} />
-        ))}
-      </ul>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {lightTheme} = value
+          const homeBg = lightTheme ? 'light-home-bg' : 'dark-home-bg'
+          return (
+            <ul className={`un-list ${homeBg}`}>
+              {videosList.map(each => (
+                <VideoItem each={each} key={each.id} />
+              ))}
+            </ul>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 
@@ -153,17 +171,25 @@ class Home extends Component {
   render() {
     const {banner} = this.state
     return (
-      <div className="home-container">
-        <SideBar />
-        <div className="display-container">
-          <Header />
-          {banner && <NxtWatchBanner onClickInto={this.onClickInto} />}
-          <div className="below-home-container">
-            {this.renderSearchBar()}
-            {this.renderTheVideos()}
-          </div>
-        </div>
-      </div>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {lightTheme} = value
+          const homeBg = lightTheme ? 'light-home-bg' : 'dark-home-bg'
+          return (
+            <div className="home-container">
+              <SideBar />
+              <div className="display-container">
+                <Header />
+                {banner && <NxtWatchBanner onClickInto={this.onClickInto} />}
+                <div className={`below-home-container ${homeBg}`}>
+                  {this.renderSearchBar()}
+                  {this.renderTheVideos()}
+                </div>
+              </div>
+            </div>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }

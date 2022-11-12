@@ -1,0 +1,40 @@
+.un-saved-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
+  height: 100%;
+  background-color: #e2e8f0;
+}
+
+.display-saved-container {
+  width: 100%;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0px;
+  background-color: #e2e8f0;
+  box-sizing: border-box;
+  margin: 0px;
+  border: 1px solid black;
+}
+
+.below-saved-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #e2e8f0;
+  overflow-y: scroll;
+  height: 100%;
+  margin: 0px;
+}
+
+.no-videos-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 0px;
+  flex-grow: 1;
+}

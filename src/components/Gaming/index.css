@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid black;
+
   height: 100px;
   background-color: #f1f1f1;
 }
@@ -14,14 +14,13 @@
   margin: 0px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #f1f1f1;
 }
 
 .below-trending-container {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: #f1f5f9;
+  background-color: white;
   overflow-y: scroll;
 }
 
@@ -54,4 +53,24 @@
   align-items: flex-start;
   flex-wrap: wrap;
   list-style-type: none;
+}
+
+.light-gaming-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  height: 100px;
+  background-color: #f1f1f1;
+}
+
+.dark-gaming-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  height: 100px;
+  background-color: #323232;
 }

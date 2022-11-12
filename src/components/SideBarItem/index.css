@@ -6,5 +6,36 @@
   align-items: center;
   padding-left: 0px;
   margin-left: 0px;
-  border: 1px solid black;
+}
+
+.light-item {
+  color: #616e7c;
+}
+
+.dark-item {
+  color: #ffffff;
+}
+
+.light-active {
+  color: #475569;
+  background-color: #cbd5e1;
+  font-weight: 500;
+}
+
+.dark-active {
+  color: #ffffff;
+  background-color: #424242;
+  font-weight: 500;
+}
+
+.light-icon {
+  color: #424242;
+}
+
+.dark-icon {
+  color: #616e7c;
+}
+
+.active-icon {
+  color: #ff0000;
 }

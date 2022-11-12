@@ -7,6 +7,7 @@ import {SiYoutubegaming} from 'react-icons/si'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import GamingItem from '../GamingItem'
+import NxtWatchContext from '../../context/NxtWatchContext'
 
 const apiConstants = {
   initial: 'INITIAL',
@@ -65,12 +66,22 @@ class Gaming extends Component {
   }
 
   renderTrendingBanner = () => (
-    <div className="trending-banner">
-      <div className="icon-container">
-        <SiYoutubegaming className="trending-icon" />
-      </div>
-      <h1 className="trending">Gaming</h1>
-    </div>
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+        const gamingContainer = lightTheme
+          ? 'light-gaming-container'
+          : 'dark-gaming-container'
+        return (
+          <div className={gamingContainer}>
+            <div className="icon-container">
+              <SiYoutubegaming className="trending-icon" />
+            </div>
+            <h1 className="trending">Gaming</h1>
+          </div>
+        )
+      }}
+    </NxtWatchContext.Consumer>
   )
 
   renderSuccess = () => {
@@ -125,16 +136,24 @@ class Gaming extends Component {
 
   render() {
     return (
-      <div className="home-container">
-        <SideBar />
-        <div className="display-container">
-          <Header />
-          {this.renderTrendingBanner()}
-          <div className="below-trending-container">
-            {this.renderTheVideos()}
-          </div>
-        </div>
-      </div>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {lightTheme} = value
+          const belowContainer = lightTheme
+            ? 'below-trending-light-container'
+            : 'below-trending-dark-container'
+          return (
+            <div className="home-container">
+              <SideBar />
+              <div className="display-container">
+                <Header />
+                {this.renderTrendingBanner()}
+                <div className={belowContainer}>{this.renderTheVideos()}</div>
+              </div>
+            </div>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }

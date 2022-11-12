@@ -33,6 +33,9 @@ export const HeaderContainer = styled.div`
   padding: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
+  width: 100%;
+  border: 0px;
+  box-sizing: border-box;
 
   background-color: ${props => props.color};
 `

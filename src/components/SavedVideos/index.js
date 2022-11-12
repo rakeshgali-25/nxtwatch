@@ -25,31 +25,10 @@ class SavedVideos extends Component {
     apiStatus: apiConstants.initial,
   }
 
-  componentDidMount() {
-    this.getTheData()
-  }
-
   renderLoading = () => (
     <div className="loader-container">
       <Loader type="ThreeDots" color="black" height="50" width="50" />
     </div>
-  )
-
-  getTheData = async () => (
-    <NxtWatchContext.Consumer>
-      {value => {
-        const {savedVideos} = value
-        console.log(savedVideos)
-        if (savedVideos !== []) {
-          this.setState({
-            savedList: savedVideos,
-            apiStatus: apiConstants.success,
-          })
-        } else {
-          this.setState({apiStatus: apiConstants.failure})
-        }
-      }}
-    </NxtWatchContext.Consumer>
   )
 
   onClickRetry = () => {
@@ -66,66 +45,45 @@ class SavedVideos extends Component {
     </div>
   )
 
-  renderSuccess = () => {
-    const {savedList} = this.state
-    console.log(savedList)
-    return (
-      <ul className="un-trending-list">
-        {savedList.map(each => (
-          <li>{each.name}</li>
-        ))}
-      </ul>
-    )
-  }
-
-  renderFailure = () => (
-    <div className="failure-container">
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="failure-view"
-        className="failure-image"
-      />
-      <h1>Oops! Something Went Wrong</h1>
-      <p className="failure-para">
-        We are having some trouble to complete your request.
-      </p>
-      <p className="failure-para">Please try again</p>
-      <button
-        type="button"
-        className="retry-button"
-        onClick={this.onClickRetry}
-      >
-        Retry
-      </button>
-    </div>
+  renderTheVideos = () => (
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {savedVideos} = value
+        console.log(savedVideos)
+        if (savedVideos.length !== 0) {
+          return (
+            <ul className="un-saved-list">
+              {savedVideos.map(each => (
+                <TrendingItem each={each} key={each.id} />
+              ))}
+            </ul>
+          )
+        }
+        return (
+          <div className="no-videos-container">
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
+              alt="no-videos"
+              className="failure-image"
+            />
+            <h1>No saved videos found</h1>
+            <p className="failure-para">
+              You can save your videos while watching them
+            </p>
+          </div>
+        )
+      }}
+    </NxtWatchContext.Consumer>
   )
-
-  renderTheVideos = () => {
-    const {apiStatus} = this.state
-    console.log(apiStatus)
-    switch (apiStatus) {
-      case 'SUCCESS':
-        return this.renderSuccess()
-      case 'FAILURE':
-        return this.renderFailure()
-      case 'INPROGRESS':
-        return this.renderLoading()
-
-      default:
-        return null
-    }
-  }
 
   render() {
     return (
       <div className="home-container">
         <SideBar />
-        <div className="display-container">
+        <div className="display-saved-container">
           <Header />
           {this.renderSavedBanner()}
-          <div className="below-trending-container">
-            {this.renderTheVideos()}
-          </div>
+          <div className="below-saved-container">{this.renderTheVideos()}</div>
         </div>
       </div>
     )

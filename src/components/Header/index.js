@@ -2,6 +2,7 @@ import {Component} from 'react'
 import {BsMoon} from 'react-icons/bs'
 import {BiSun} from 'react-icons/bi'
 import NxtWatchContext from '../../context/NxtWatchContext'
+import './index.css'
 
 import {
   LightLogoutButton,

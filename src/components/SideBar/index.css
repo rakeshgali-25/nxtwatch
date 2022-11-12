@@ -3,12 +3,20 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 20%;
-  border: 1px solid black;
+
   height: 100vh;
 }
 
 .link {
   text-decoration: none;
+}
+
+.lightBg {
+  background-color: #ffffff;
+}
+
+.darkBg {
+  background-color: #212121;
 }
 
 .contact-us {
@@ -37,8 +45,14 @@
   align-items: center;
 }
 
-.para {
+.light-para {
   color: #475569;
+  font-family: Roboto;
+  padding: 25px;
+}
+
+.dark-para {
+  color: #ffffff;
   font-family: Roboto;
   padding: 25px;
 }
