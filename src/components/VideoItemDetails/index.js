@@ -19,10 +19,46 @@ const apiConstants = {
 }
 
 class VideoItemDetails extends Component {
-  state = {videoDetails: {}, apiStatus: apiConstants.initial}
+  state = {
+    videoDetails: {},
+    apiStatus: apiConstants.initial,
+    liked: false,
+    disLiked: false,
+    saved: false,
+  }
 
   componentDidMount() {
     this.getTheData()
+  }
+
+  onClickLiked = () => {
+    const {liked} = this.state
+    if (liked === true) {
+      this.setState({
+        liked: false,
+        disLiked: false,
+      })
+    } else {
+      this.setState({
+        liked: true,
+        disLiked: false,
+      })
+    }
+  }
+
+  onClickDisLiked = () => {
+    const {disLiked, liked} = this.state
+    if (disLiked === true && liked === false) {
+      this.setState({
+        liked: false,
+        disLiked: false,
+      })
+    } else {
+      this.setState({
+        liked: false,
+        disLiked: true,
+      })
+    }
   }
 
   renderLoading = () => (
@@ -82,7 +118,7 @@ class VideoItemDetails extends Component {
   renderSuccess = () => (
     <NxtWatchContext.Consumer>
       {value => {
-        const {videoDetails} = this.state
+        const {videoDetails, liked, disLiked, saved} = this.state
         const {
           channel,
           description,
@@ -100,27 +136,51 @@ class VideoItemDetails extends Component {
 
         const saveClicked = () => {
           onClickSaveButton(videoDetails)
+          this.setState(prevState => ({saved: !prevState.saved}))
         }
 
+        const {lightTheme} = value
+        const videoDetailsContainer = lightTheme
+          ? 'video-details-light'
+          : 'video-details-dark'
+        const videoTitle = lightTheme ? 'video-title-light' : 'video-title-dark'
+
+        const videoPara1 = lightTheme ? 'video-para1-light' : 'video-para1-dark'
+        const videoPara2 = lightTheme ? 'video-para2-light' : 'video-para2-dark'
+        const likedBtn = liked ? 'liked-true' : ''
+        const disLikeBtn = disLiked ? 'liked-true' : ''
+        const saveBtn = saved ? 'liked-true' : ''
+        const saveIcon = saved ? <MdPlaylistAddCheck /> : <MdPlaylistAdd />
+        const saveText = saved ? 'Saved' : 'Save'
         return (
-          <div className="video-details">
+          <div className={videoDetailsContainer}>
             <ReactPlayer url={videoUrl} width="800px" height="600px" controls />
-            <p className="video-title">{title}</p>
+            <p className={videoTitle}>{title}</p>
             <div className="views-container">
-              <p className="para-left">
+              <p className={`para-left ${videoPara1}`}>
                 {viewCount} views . {difference} ago
               </p>
               <div className="like-container">
-                <p className="para">
+                <button
+                  type="button"
+                  onClick={this.onClickLiked}
+                  className={`para-button ${videoPara1} ${likedBtn}`}
+                >
                   <BiLike /> Like
-                </p>
-                <p className="para">
+                </button>
+                <button
+                  type="button"
+                  onClick={this.onClickDisLiked}
+                  className={`para-button ${videoPara1} ${disLikeBtn}`}
+                >
                   <BiDislike /> Dislike
-                </p>
-                <button type="button" onClick={saveClicked}>
-                  <p className="para">
-                    <MdPlaylistAdd /> Save
-                  </p>
+                </button>
+                <button
+                  type="button"
+                  onClick={saveClicked}
+                  className={`save-button ${videoPara1} ${saveBtn}`}
+                >
+                  {saveIcon} {saveText}
                 </button>
               </div>
             </div>
@@ -132,9 +192,9 @@ class VideoItemDetails extends Component {
                 className="channel-icon"
               />
               <div className="para-container">
-                <p className="title">{name}</p>
-                <p className="details-para">{subscriberCount} subscribers</p>
-                <p className="details-para">{description}</p>
+                <p className={videoPara2}>{name}</p>
+                <p className={videoPara1}>{subscriberCount} subscribers</p>
+                <p className={videoPara2}>{description}</p>
               </div>
             </div>
           </div>

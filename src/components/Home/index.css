@@ -9,7 +9,6 @@
 .home-container {
   display: flex;
   flex-direction: row;
-  background-color: black;
 }
 
 .search-container {
@@ -17,11 +16,21 @@
   flex-direction: row;
 }
 
-.search-input {
+.search-input-light {
   padding: 10px;
   width: 600px;
+  background-color: #ffffff;
+  outline: none;
+  border: 1px solid grey;
+}
+
+.search-input-dark {
+  padding: 10px;
+  width: 600px;
+  color: white;
   background-color: transparent;
   outline: none;
+  border: 1px solid grey;
 }
 
 .below-home-container {
@@ -47,7 +56,7 @@
 }
 
 .light-home-bg {
-  background-color: #ffffff;
+  background-color: #f1f1f1;
 }
 
 .dark-home-bg {
@@ -85,4 +94,9 @@
   flex-wrap: wrap;
   width: 100%;
   padding-left: 0px;
+}
+
+.light-bg {
+  background-color: black;
+  color: grey;
 }

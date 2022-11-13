@@ -25,19 +25,25 @@ class Header extends Component {
             onClickTheme()
             console.log(lightTheme)
           }
-
+          const themeButton = lightTheme
+            ? 'theme-button-light'
+            : 'theme-button-dark'
           const themeIcon = lightTheme ? <BsMoon /> : <BiSun />
           const bgColor = lightTheme ? '#ffffff' : '#231f20'
           return (
             <HeaderContainer color={bgColor}>
               <RightContainer>
-                <button type="button" onClick={themeClicked}>
-                  <Icon>{themeIcon}</Icon>
+                <button
+                  type="button"
+                  onClick={themeClicked}
+                  className={themeButton}
+                >
+                  {themeIcon}
                 </button>
                 <Profile
                   src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
                   alt="profile"
-                  className="profile"
+                  className="profile-header"
                 />
 
                 {lightTheme ? (

@@ -1,6 +1,7 @@
 import './index.css'
 import {formatDistanceToNow} from 'date-fns'
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import NxtWatchContext from '../../context/NxtWatchContext'
 
 class TrendingItem extends Component {
@@ -14,11 +15,12 @@ class TrendingItem extends Component {
       <NxtWatchContext.Consumer>
         {value => {
           const {each} = this.props
+
           const {
             channel,
             id,
             publishedAt,
-            viewsCount,
+            viewCount,
             title,
             thumbnailUrl,
           } = each
@@ -34,7 +36,7 @@ class TrendingItem extends Component {
             : 'channel-dark-para'
 
           return (
-            <li className="list-trending-item">
+            <Link to={`/videos/${id}`} className="list-trending-item">
               <img
                 src={thumbnailUrl}
                 alt="thumbnail"
@@ -46,11 +48,11 @@ class TrendingItem extends Component {
                 <p className={channelPara}>{name}</p>
                 <div>
                   <p className={channelPara}>
-                    {viewsCount} views . {difference}
+                    {viewCount} views . {difference}
                   </p>
                 </div>
               </div>
-            </li>
+            </Link>
           )
         }}
       </NxtWatchContext.Consumer>

@@ -92,13 +92,15 @@ class Home extends Component {
     <NxtWatchContext.Consumer>
       {value => {
         const {lightTheme} = value
-        const sdBg = lightTheme ? 'lightBg' : 'darkBg'
-
+        const sdBg = lightTheme ? 'light-bg' : 'dark-bg'
+        const searchInput = lightTheme
+          ? 'search-input-light'
+          : 'search-input-dark'
         return (
           <div className="search-container">
             <input
               type="search"
-              className="search-input"
+              className={searchInput}
               onChange={this.onChangeInput}
               placeholder="Search"
             />

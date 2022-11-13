@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import {BsSearch} from 'react-icons/bs'
 import Loader from 'react-loader-spinner'
 import {MdWhatshot} from 'react-icons/md'
+import {BiListPlus} from 'react-icons/bi'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import NxtWatchBanner from '../NxtWatchBanner'
@@ -20,8 +21,6 @@ const apiConstants = {
 
 class SavedVideos extends Component {
   state = {
-    savedList: [],
-
     apiStatus: apiConstants.initial,
   }
 
@@ -37,22 +36,31 @@ class SavedVideos extends Component {
   }
 
   renderSavedBanner = () => (
-    <div className="trending-banner">
-      <div className="icon-container">
-        <MdWhatshot className="trending-icon" />
-      </div>
-      <h1 className="trending">Saved Videos</h1>
-    </div>
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+        const darkBg = lightTheme ? 'light-bg-trending' : 'dark-bg-trending'
+        const iconBg = lightTheme ? '' : 'dark-trending-icon'
+        return (
+          <div className={darkBg}>
+            <div className="icon-container">
+              <BiListPlus className={`trending-icon ${iconBg}`} />
+            </div>
+            <h1 className="trending">Saved Videos</h1>
+          </div>
+        )
+      }}
+    </NxtWatchContext.Consumer>
   )
 
   renderTheVideos = () => (
     <NxtWatchContext.Consumer>
       {value => {
         const {savedVideos} = value
-        console.log(savedVideos)
+
         if (savedVideos.length !== 0) {
           return (
-            <ul className="un-saved-list">
+            <ul className="un-trending-list">
               {savedVideos.map(each => (
                 <TrendingItem each={each} key={each.id} />
               ))}
@@ -78,14 +86,24 @@ class SavedVideos extends Component {
 
   render() {
     return (
-      <div className="home-container">
-        <SideBar />
-        <div className="display-saved-container">
-          <Header />
-          {this.renderSavedBanner()}
-          <div className="below-saved-container">{this.renderTheVideos()}</div>
-        </div>
-      </div>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {lightTheme} = value
+          const belowContainer = lightTheme
+            ? 'below-trending-light-container'
+            : 'below-trending-dark-container'
+          return (
+            <div className="trending-container">
+              <SideBar />
+              <div className="display-container">
+                <Header />
+                {this.renderSavedBanner()}
+                <div className={belowContainer}>{this.renderTheVideos()}</div>
+              </div>
+            </div>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }

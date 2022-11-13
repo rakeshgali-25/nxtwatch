@@ -9,7 +9,7 @@
 }
 
 .light-item {
-  color: #616e7c;
+  color: #1e293b;
 }
 
 .dark-item {
@@ -17,9 +17,9 @@
 }
 
 .light-active {
-  color: #475569;
-  background-color: #cbd5e1;
-  font-weight: 500;
+  color: #1e293b;
+  background-color: #f1f5f9;
+  font-weight: 600;
 }
 
 .dark-active {

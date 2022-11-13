@@ -17,50 +17,33 @@ const sideBarItems = [
     path: '/',
     icon: <AiFillHome className="sidebar-icon" />,
     para: 'Home',
-    isActive: true,
   },
   {
     id: 'TRENDING',
     path: '/trending',
     icon: <MdWhatshot className="sidebar-icon" />,
     para: 'Trending',
-    isActive: false,
   },
   {
     id: 'GAMING',
     path: '/gaming',
     icon: <SiYoutubegaming className="sidebar-icon" />,
     para: 'Gaming',
-    isActive: false,
   },
   {
     id: 'SAVEDVIDEOS',
     path: '/savedvideos',
     icon: <BiListPlus className="sidebar-icon" />,
     para: 'Saved Videos',
-    isActive: false,
   },
 ]
 
 class SideBar extends Component {
-  state = {sideBarList: sideBarItems}
-
-  onClickIcon = async id => {
-    const {sideBarList} = this.state
-    const updatedList = await sideBarList.map(each => {
-      if (each.id === id) {
-        return {...each, isActive: !each.isActive}
-      }
-      return {...each, isActive: false}
-    })
-    console.log(updatedList)
-    this.setState({sideBarList: updatedList})
-  }
-
   renderSidebar = () => (
     <NxtWatchContext.Consumer>
       {value => {
         const {lightTheme} = value
+
         console.log(lightTheme)
         const sdBg = lightTheme ? 'lightBg' : 'darkBg'
         const companyLogo = lightTheme
@@ -68,17 +51,13 @@ class SideBar extends Component {
           : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
 
         const para = lightTheme ? 'light-para' : 'dark-para'
-        const {sideBarList} = this.state
+
         return (
           <div className={`sidebar-container ${sdBg}`}>
             <CompanyImage src={companyLogo} alt="logo" />
             <ListContainer>
-              {sideBarList.map(each => (
-                <SideBarItem
-                  each={each}
-                  key={each.key}
-                  onClickIcon={this.onClickIcon}
-                />
+              {sideBarItems.map(each => (
+                <SideBarItem each={each} key={each.id} />
               ))}
             </ListContainer>
             <div className="below-container">

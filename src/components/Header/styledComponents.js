@@ -45,11 +45,7 @@ export const CompanyImage = styled.img`
 `
 export const Profile = styled.img`
   height: 35px;
-  border: 1px solid black;
 `
 export const Icon = styled.div`
-  height: 35px;
-  border: 1px solid black;
-  background-size: cover;
-  width: 35px;
+  background-color: transparent;
 `

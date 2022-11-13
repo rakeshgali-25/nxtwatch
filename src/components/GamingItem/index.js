@@ -1,4 +1,5 @@
 import './index.css'
+import {Link} from 'react-router-dom'
 import NxtWatchContext from '../../context/NxtWatchContext'
 
 const GamingItem = props => (
@@ -10,7 +11,7 @@ const GamingItem = props => (
       const gameTitle = lightTheme ? 'game-light-heading' : 'game-dark-heading'
 
       return (
-        <li className="gaming-item">
+        <Link to={`/videos/${id}`} className="gaming-item">
           <img
             src={thumbnailUrl}
             alt="gaming-thumbnail"
@@ -18,7 +19,7 @@ const GamingItem = props => (
           />
           <p className={gameTitle}>{title}</p>
           <p className="game-para">{viewsCount} Watching Worldwide</p>
-        </li>
+        </Link>
       )
     }}
   </NxtWatchContext.Consumer>
