@@ -1,12 +1,14 @@
 import {Component} from 'react'
 import {BsMoon} from 'react-icons/bs'
 import {BiSun} from 'react-icons/bi'
+import Cookies from 'js-cookie'
+
 import NxtWatchContext from '../../context/NxtWatchContext'
+import PopupDesignFiles from '../PopupDesignFiles'
+
 import './index.css'
 
 import {
-  LightLogoutButton,
-  DarkLogoutButton,
   HeaderContainer,
   CompanyImage,
   Profile,
@@ -29,7 +31,7 @@ class Header extends Component {
             ? 'theme-button-light'
             : 'theme-button-dark'
           const themeIcon = lightTheme ? <BsMoon /> : <BiSun />
-          const bgColor = lightTheme ? '#ffffff' : '#231f20'
+          const bgColor = lightTheme ? '#ffffff' : '#212121'
           return (
             <HeaderContainer color={bgColor}>
               <RightContainer>
@@ -46,11 +48,7 @@ class Header extends Component {
                   className="profile-header"
                 />
 
-                {lightTheme ? (
-                  <LightLogoutButton>Logout</LightLogoutButton>
-                ) : (
-                  <DarkLogoutButton>Logout</DarkLogoutButton>
-                )}
+                <PopupDesignFiles />
               </RightContainer>
             </HeaderContainer>
           )

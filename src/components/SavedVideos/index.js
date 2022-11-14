@@ -31,7 +31,6 @@ class SavedVideos extends Component {
   )
 
   onClickRetry = () => {
-    console.log('retry')
     this.getTheData()
   }
 
@@ -56,7 +55,8 @@ class SavedVideos extends Component {
   renderTheVideos = () => (
     <NxtWatchContext.Consumer>
       {value => {
-        const {savedVideos} = value
+        const {savedVideos, lightTheme} = value
+        const headingTheme = lightTheme ? 'light-heading' : 'dark-heading'
 
         if (savedVideos.length !== 0) {
           return (
@@ -74,7 +74,7 @@ class SavedVideos extends Component {
               alt="no-videos"
               className="failure-image"
             />
-            <h1>No saved videos found</h1>
+            <h1 className={headingTheme}>No saved videos found</h1>
             <p className="failure-para">
               You can save your videos while watching them
             </p>
@@ -90,12 +90,16 @@ class SavedVideos extends Component {
         {value => {
           const {lightTheme} = value
           const belowContainer = lightTheme
-            ? 'below-trending-light-container'
-            : 'below-trending-dark-container'
+            ? 'below-saved-light-container'
+            : 'below-saved-dark-container'
+
+          const savedContainer = lightTheme
+            ? 'display-saved-container-dark'
+            : 'display-saved-container-light'
           return (
-            <div className="trending-container">
+            <div className="saved-container">
               <SideBar />
-              <div className="display-container">
+              <div className={savedContainer}>
                 <Header />
                 {this.renderSavedBanner()}
                 <div className={belowContainer}>{this.renderTheVideos()}</div>

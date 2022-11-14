@@ -7,7 +7,7 @@ import {BiListPlus} from 'react-icons/bi'
 
 const NxtWatchContext = React.createContext({
   savedVideos: [],
-  lightTheme: true,
+  lightTheme: '',
   activeId: 'HOME',
   onClickSideBar: () => {},
   onClickTheme: () => {},

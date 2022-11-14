@@ -5,12 +5,13 @@ import {MdWhatshot} from 'react-icons/md'
 import {SiYoutubegaming} from 'react-icons/si'
 import {BiListPlus} from 'react-icons/bi'
 
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import {Component} from 'react'
 import Home from './components/Home'
 import Login from './components/Login'
 import Trending from './components/Trending'
 import Gaming from './components/Gaming'
+import ProtectedRoute from './components/ProtectedRoute'
 import VideoItemDetails from './components/VideoItemDetails'
 import NotFound from './components/NotFound'
 import SavedVideos from './components/SavedVideos'
@@ -54,7 +55,8 @@ class App extends Component {
     const {savedVideos} = this.state
 
     if (savedVideos.includes(details)) {
-      console.log(details)
+      const newSavedVideo = savedVideos.filter(each => each.id !== details.id)
+      this.setState({savedVideos: newSavedVideo})
     } else {
       this.setState({savedVideos: [...savedVideos, details]}, this.printSaved())
     }
@@ -91,12 +93,16 @@ class App extends Component {
       >
         <Switch>
           <Route path="/login" component={Login} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/trending" component={Trending} />
-          <Route exact path="/gaming" component={Gaming} />
-          <Route exact path="/videos/:id" component={VideoItemDetails} />
-          <Route exact path="/savedvideos" component={SavedVideos} />
-          <Route component={NotFound} />
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/trending" component={Trending} />
+          <ProtectedRoute exact path="/gaming" component={Gaming} />
+          <ProtectedRoute
+            exact
+            path="/videos/:id"
+            component={VideoItemDetails}
+          />
+          <ProtectedRoute exact path="/savedvideos" component={SavedVideos} />
+          <ProtectedRoute component={NotFound} />
         </Switch>
       </NxtWatchContext.Provider>
     )

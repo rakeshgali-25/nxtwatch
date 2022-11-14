@@ -14,6 +14,7 @@ const apiConstants = {
   inProgress: 'INPROGRESS',
   success: 'SUCCESS',
   failure: 'FAILURE',
+  noVideos: 'NOVIDEOS',
 }
 
 class Home extends Component {
@@ -61,9 +62,16 @@ class Home extends Component {
         profileImageUrl: each.channel.profile_image_url,
       },
     }))
-
+    console.log(updatedData)
     if (response.ok === true) {
-      this.setState({videosList: updatedData, apiStatus: apiConstants.success})
+      if (updatedData.length === 0) {
+        this.setState({apiStatus: apiConstants.noVideos, searchInput: ''})
+      } else {
+        this.setState({
+          videosList: updatedData,
+          apiStatus: apiConstants.success,
+        })
+      }
     } else {
       this.setState({apiStatus: apiConstants.failure})
     }
@@ -92,17 +100,21 @@ class Home extends Component {
     <NxtWatchContext.Consumer>
       {value => {
         const {lightTheme} = value
+
+        const {searchInput} = this.state
         const sdBg = lightTheme ? 'light-bg' : 'dark-bg'
-        const searchInput = lightTheme
+        const searchInputTheme = lightTheme
           ? 'search-input-light'
           : 'search-input-dark'
+
         return (
           <div className="search-container">
             <input
               type="search"
-              className={searchInput}
+              className={searchInputTheme}
               onChange={this.onChangeInput}
               placeholder="Search"
+              value={searchInput}
             />
             <div className={`search-icon ${sdBg}`}>
               <BsSearch onClick={this.onClickSearch} />
@@ -132,26 +144,64 @@ class Home extends Component {
     )
   }
 
+  renderNoVideos = () => (
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+        const headingTheme = lightTheme ? 'light-heading' : 'dark-heading'
+        return (
+          <div className="failure-container">
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+              alt="no video"
+              className="failure-image"
+            />
+            <h1 className={headingTheme}>No Search results found</h1>
+            <p className="failure-para">
+              Try different keywords or remove search filter
+            </p>
+
+            <button
+              type="button"
+              className="retry-button"
+              onClick={this.onClickRetry}
+            >
+              Retry
+            </button>
+          </div>
+        )
+      }}
+    </NxtWatchContext.Consumer>
+  )
+
   renderFailure = () => (
-    <div className="failure-container">
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="failure-view"
-        className="failure-image"
-      />
-      <h1>Oops! Something Went Wrong</h1>
-      <p className="failure-para">
-        We are having some trouble to complete your request.
-      </p>
-      <p className="failure-para">Please try again</p>
-      <button
-        type="button"
-        className="retry-button"
-        onClick={this.onClickRetry}
-      >
-        Retry
-      </button>
-    </div>
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {lightTheme} = value
+        const headingTheme = lightTheme ? 'light-heading' : 'dark-heading'
+        return (
+          <div className="failure-container">
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+              alt="failure-view"
+              className="failure-image"
+            />
+            <h1 className={headingTheme}>Oops! Something Went Wrong</h1>
+            <p className="failure-para">
+              We are having some trouble to complete your request.
+            </p>
+            <p className="failure-para">Please try again</p>
+            <button
+              type="button"
+              className="retry-button"
+              onClick={this.onClickRetry}
+            >
+              Retry
+            </button>
+          </div>
+        )
+      }}
+    </NxtWatchContext.Consumer>
   )
 
   renderTheVideos = () => {
@@ -160,6 +210,8 @@ class Home extends Component {
     switch (apiStatus) {
       case 'SUCCESS':
         return this.renderSuccess()
+      case 'NOVIDEOS':
+        return this.renderNoVideos()
       case 'FAILURE':
         return this.renderFailure()
       case 'INPROGRESS':
@@ -177,13 +229,16 @@ class Home extends Component {
         {value => {
           const {lightTheme} = value
           const homeBg = lightTheme ? 'light-home-bg' : 'dark-home-bg'
+          const displayHomeContainer = lightTheme
+            ? 'display-saved-container-dark'
+            : 'display-saved-container-light'
           return (
             <div className="home-container">
               <SideBar />
               <div className="display-container">
                 <Header />
                 {banner && <NxtWatchBanner onClickInto={this.onClickInto} />}
-                <div className={`below-home-container ${homeBg}`}>
+                <div className={`below-home-container  ${homeBg}`}>
                   {this.renderSearchBar()}
                   {this.renderTheVideos()}
                 </div>

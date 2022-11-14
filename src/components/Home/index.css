@@ -4,6 +4,7 @@
   margin: 0px;
   display: flex;
   flex-direction: column;
+  background-color: transparent;
 }
 
 .home-container {
@@ -39,6 +40,13 @@
   padding: 20px;
   background-color: #f1f1f1;
   overflow-y: scroll;
+}
+
+.light-heading {
+  color: #181818;
+}
+.dark-heading {
+  color: #f1f1f1;
 }
 
 .search-icon {
@@ -93,10 +101,35 @@
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
+  background-color: transparent;
   padding-left: 0px;
 }
 
 .light-bg {
   background-color: black;
   color: grey;
+}
+
+.display-home-container-dark {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #f1f1f1;
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+.display-home-container-light {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: black;
+  box-sizing: border-box;
+  margin: 0px;
 }

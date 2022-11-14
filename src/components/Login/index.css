@@ -67,6 +67,7 @@
   padding: 10px;
   width: 100%;
   border: 1px solid #64748b;
+  background-color: transparent;
 }
 
 .login-button {
@@ -84,4 +85,20 @@
   color: #64748b;
   font-weight: 600;
   font-size: 13px;
+}
+
+.light-login-bg {
+  background-color: #ffffff;
+}
+
+.dark-login-bg {
+  background-color: #212121;
+}
+
+.dark-bg-form {
+  background-color: black;
+}
+
+.white-para {
+  color: #ffffff;
 }

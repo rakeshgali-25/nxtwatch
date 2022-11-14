@@ -113,52 +113,68 @@ class Login extends Component {
     const ErrorMsg = loginFail && `*${errorMsg}`
 
     return (
-      <div className="login-container">
-        <form className="form-container" onSubmit={this.onSubmitForm}>
-          <div className="image-container">{this.renderImage()}</div>
-          <div className="label-container">
-            <label htmlFor="username" className="label">
-              USERNAME
-            </label>
-            <input
-              id="username"
-              placeholder="Username"
-              className="input"
-              onChange={this.onChangeUsername}
-              value={username}
-              type="text"
-            />
-          </div>
-          <div className="label-container">
-            <label htmlFor="password" className="label">
-              PASSWORD
-            </label>
-            <input
-              id="password"
-              placeholder="Password"
-              className="input"
-              onChange={this.onChangePassword}
-              value={password}
-              type={passwordType}
-            />
-          </div>
-          <div className="show-password-container">
-            <input
-              type="checkbox"
-              id="checkbox"
-              value={showPassword}
-              onChange={this.onChangeShowPassword}
-            />
-            <label htmlFor="checkbox" className="show-password">
-              Show Password
-            </label>
-          </div>
-          <button type="submit" className="login-button">
-            Login
-          </button>
-          <p className="error-msg">{ErrorMsg}</p>
-        </form>
-      </div>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {lightTheme} = value
+          const loginBg = lightTheme ? 'light-login-bg' : 'dark-login-bg'
+          const formContainerbg = lightTheme ? 'light-bg-form' : 'dark-bg-form'
+          const whitePara = lightTheme ? '' : 'white-para'
+          return (
+            <div className={`login-container ${loginBg}`}>
+              <form
+                className={`form-container ${formContainerbg}`}
+                onSubmit={this.onSubmitForm}
+              >
+                <div className="image-container">{this.renderImage()}</div>
+                <div className="label-container">
+                  <label htmlFor="username" className={`label ${whitePara}`}>
+                    USERNAME
+                  </label>
+                  <input
+                    id="username"
+                    placeholder="Username"
+                    className="input"
+                    onChange={this.onChangeUsername}
+                    value={username}
+                    type="text"
+                  />
+                </div>
+                <div className="label-container">
+                  <label htmlFor="password" className={`label ${whitePara}`}>
+                    PASSWORD
+                  </label>
+                  <input
+                    id="password"
+                    placeholder="Password"
+                    className="input"
+                    onChange={this.onChangePassword}
+                    value={password}
+                    type={passwordType}
+                  />
+                </div>
+                <div className="show-password-container">
+                  <input
+                    type="checkbox"
+                    id="checkbox"
+                    value={showPassword}
+                    onChange={this.onChangeShowPassword}
+                  />
+                  <label
+                    htmlFor="checkbox"
+                    className={`show-password ${whitePara}`}
+                  >
+                    Show Password
+                  </label>
+                </div>
+                <button type="submit" className="login-button">
+                  Login
+                </button>
+                <p className="error-msg">{ErrorMsg}</p>
+              </form>
+            </div>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }

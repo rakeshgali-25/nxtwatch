@@ -23,6 +23,7 @@
   margin: 0px;
   background-color: black;
   overflow-y: scroll;
+  max-height: 100%;
 }
 
 .below-trending-light-container {
@@ -30,8 +31,9 @@
   flex-direction: column;
   padding: 20px;
   margin: 0px;
-  background-color: white;
+  background-color: #f8fafc;
   overflow-y: scroll;
+  max-height: 100%;
 }
 
 .trending-icon {
@@ -41,6 +43,7 @@
   border-radius: 50px;
   box-sizing: border-box;
   padding: 10px;
+  margin-right: 12px;
 }
 
 .trending-icon {
@@ -60,7 +63,7 @@
 }
 
 .dark-bg-trending {
-  background-color: #313131;
+  background-color: #181818;
   color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -80,7 +83,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: #e2e8f0;
+  background-color: #ebebeb;
   height: 100px;
 }
 
